@@ -4,14 +4,14 @@ var chart_hypertension;
 var chart_avg_glucose_level;
 var chart_bmi;
 
-// set element by id
+// find element by id
 function ConnectElementId() {
     console.log("ConnectElementId");
     chart_age = $("#chart_age");
     chart_heart_disease = $("#chart_heart_disease");
     chart_hypertension = $("#chart_hypertension");
     chart_avg_glucose_level = $("#chart_avg_glucose_level");
-    chart_bmi = $("#chart_avg_glucose_level");
+    chart_bmi = $("#chart_bmi");
 }
 
 // Load data from flask by JQuery Ajax
@@ -89,51 +89,40 @@ function BulidIntervalLabel(start, end, step) {
 // Age bar chart
 function LoadAgeData(data) {
     // console.log("LoadAgeData");
-
-    config.labels = BulidIntervalLabel(0, 100, 10);
-    config.datasets = [];
-    config.datasets.push({
+    var data_source = {};
+    data_source.labels = BulidIntervalLabel(0, 100, 10);
+    data_source.datasets = [];
+    data_source.datasets.push({
         label: "Healthy Pecentage(%)",
+        backgroundColor: "#46BFBD",
         data: data.healthy
-    })
-
-    config.datasets.push({
+    });
+    data_source.datasets.push({
         label: "Stroke Pecentage(%)",
-        backgroundColor: "#ff0000",
+        backgroundColor: "#F7464A",
         data: data.stroke
-    })
+    });
 
-    new Chart(chart_age,
-        {
-            type: 'bar',
-            data: config,
-            options: {
-                legend: { display: true },
-                title: {
-                    display: true,
-                    text: 'Age population - Stroke percentage'
-                },
-            },
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-            }
-        });
+    var options = {
+        legend: { display: true },
+        title: {
+            display: true,
+            text: 'Age population - Stroke percentage'
+        }
+    };
+
+    var config = {
+        type: 'bar',
+        data: data_source,
+        options: options
+    }
+
+    new Chart(chart_age, config);
 
     return true;
 }
 
-var config = {
-    labels: [],
-    datasets: [
-    ]
-};
-
-
+// Disease Doughnut Chart
 function BuildDoughnutChart(chart, data, labels, title) {
     var colors = [
         "#F7464A",
@@ -184,6 +173,7 @@ function LoadHypertensionData(data) {
     BuildDoughnutChart(chart_hypertension, data, labels, title)
 }
 
+// Average Glucode Level Line Chart
 function LoadAvgGlucodeLevelData(data) {
     var labels = BulidIntervalLabel(40, 260, 20);
     var data = {
@@ -212,6 +202,74 @@ function LoadAvgGlucodeLevelData(data) {
     new Chart(chart_avg_glucose_level, config);
 }
 
+function GetBmiConfig(data)
+{
+    var data_source = {};
+    data_source.labels = BulidIntervalLabel(10, 60, 5);
+    data_source.datasets = [];
+    data_source.datasets.push({
+        label: "Healthy Pecentage(%)",
+        backgroundColor: "#46BFBD",
+        data: data.healthy
+    });
+    data_source.datasets.push({
+        label: "Stroke Pecentage(%)",
+        backgroundColor: "#F7464A",
+        data: data.stroke
+    });
+
+    var options = {
+        legend: { display: true },
+        title: {
+            display: true,
+            text: 'BMI Percentage'
+        }
+    };
+
+    var config = {
+        type: 'bar',
+        data: data_source,
+        options: options
+    }
+
+    new Chart(chart_bmi, config);
+}
+
+function LoadBmiData(data) {
+    var data_source = {};
+    data_source.labels = BulidIntervalLabel(0, 100, 10);
+    data_source.datasets = [];
+    data_source.datasets.push({
+        label: "Healthy Pecentage(%)",
+        backgroundColor: "#46BFBD",
+        data: data.healthy
+    });
+    data_source.datasets.push({
+        label: "Stroke Pecentage(%)",
+        backgroundColor: "#F7464A",
+        data: data.stroke
+    });
+
+    var options = {
+        legend: { display: true },
+        title: {
+            display: true,
+            text: 'Age population - Stroke percentage'
+        }
+    };
+
+    var config = {
+        type: 'bar',
+        data: data_source,
+        options: options
+    }
+
+    new Chart(chart_bmi, config);
+
+    return true;
+}
+
+// Load Trigger
 window.onload = function () {
     ConnectElementId();
     LoadDataByAjax();

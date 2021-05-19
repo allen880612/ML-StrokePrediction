@@ -44,7 +44,10 @@ def age():
     
 @app.route("/bmi")
 def bmi():
-    return {}
+    healthy = [2, 8.5, 9, 14.5, 18, 12.2, 8, 10, 12.8, 5]
+    stroke = [0, 0, 4.3, 5, 5, 15.7, 27.5, 32.5, 10, 0]
+    model = Model.ArrayModel(healthy, stroke)
+    return json.dumps(model.__dict__)
 
 @app.route("/heart_disease")
 def heart_disease():
