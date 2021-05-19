@@ -78,11 +78,19 @@ function LoadDataByAjax() {
 
 // Element build by Cahrt js
 
+function BulidIntervalLabel(start, end, step) {
+    labels = []
+    for (var i = start; i < end; i += step) {
+        labels.push(i.toString() + "-" + (i + step).toString());
+    }
+    return labels;
+}
+
 // Age bar chart
 function LoadAgeData(data) {
     // console.log("LoadAgeData");
 
-    config.labels = BulidAgeLabel();
+    config.labels = BulidIntervalLabel(0, 100, 10);
     config.datasets = [];
     config.datasets.push({
         label: "Healthy Pecentage(%)",
@@ -122,21 +130,8 @@ function LoadAgeData(data) {
 var config = {
     labels: [],
     datasets: [
-    ],
-    xHighlightRange: {
-        begin: 50,
-        end: 60,
-        fillStyle: "#000000",
-    }
+    ]
 };
-
-function BulidAgeLabel() {
-    ageLabels = []
-    for (var i = 0; i < 100; i += 10) {
-        ageLabels.push(i.toString() + "-" + (i + 10).toString());
-    }
-    return ageLabels;
-}
 
 
 function BuildDoughnutChart(chart, data, labels, title) {
@@ -187,6 +182,34 @@ function LoadHypertensionData(data) {
     var labels = ["Healthy have disease(%)", "Healthy not have disease(%)", "Stroke have disease(%)", "Stroke not have disease(%)"];
     var title = 'Have hypertension';
     BuildDoughnutChart(chart_hypertension, data, labels, title)
+}
+
+function LoadAvgGlucodeLevelData(data) {
+    var labels = BulidIntervalLabel(40, 260, 20);
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'Healthy People(%)',
+            data: data.healthy,
+            fill: false,
+            borderColor: '#46BFBD',
+            tension: 0.1
+        },
+        {
+            label: 'Stroke People(%)',
+            data: data.stroke,
+            fill: false,
+            borderColor: '#F7464A',
+            tension: 0.1
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+    };
+
+    new Chart(chart_avg_glucose_level, config);
 }
 
 window.onload = function () {
