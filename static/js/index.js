@@ -22,29 +22,31 @@ function ConnectElementId() {
     html_chart_bmi = $("#chart_bmi");
 }
 
-// Load data from flask by JQuery Ajax
+/**
+ * Load Data from Flask by JQury.ajax & Build Chart
+ */
 
-function LoadData(api, data) {
+function BuildChart(api, data) {
     // console.log("Ajax call LoadData: " + api);
     switch (api) {
         case "/age":
-            chart_age = LoadAgeData(data);
+            chart_age = BuildChartAge(data);
             break;
 
         case "/heart_disease":
-            chart_heart_disease = LoadHeartDiseaseData(data);
+            chart_heart_disease = BuildChartHeartDisease(data);
             break;
 
         case "/hypertension":
-            chart_hypertension = LoadHypertensionData(data);
+            chart_hypertension = BuildChartHypertension(data);
             break;
 
         case "/avg_glucose_level":
-            chart_avg_glucose_level = LoadAvgGlucodeLevelData(data);
+            chart_avg_glucose_level = BuildChartAvgGlucodeLevel(data);
             break;
 
         case "/bmi":
-            chart_bmi = LoadBmiData(data);
+            chart_bmi = BuildChartBmi(data);
             break;
 
         default:
@@ -52,7 +54,7 @@ function LoadData(api, data) {
     }
 }
 
-function GetData(api) {
+function GetDataByAjax(api) {
     // console.log("GetData: " + api);
     var response = null;
 
@@ -75,18 +77,18 @@ function GetData(api) {
 
     if (response) {
         var resultJson = JSON.parse(response)
-        LoadData(api, resultJson);
+        BuildChart(api, resultJson);
     }
 }
 
-function GetDataByAjax() {
+function GetData() {
     // console.log("GetDataByAjax");
 
-    GetData("/age");
-    GetData("/heart_disease");
-    GetData("/hypertension");
-    GetData("/avg_glucose_level");
-    GetData("/bmi");
+    GetDataByAjax("/age");
+    GetDataByAjax("/heart_disease");
+    GetDataByAjax("/hypertension");
+    GetDataByAjax("/avg_glucose_level");
+    GetDataByAjax("/bmi");
 }
 
 // Element build by Cahrt js
@@ -143,9 +145,10 @@ function GetAgeData(data)
     return data_source;
 }
 
+
 // Age bar chart
-function LoadAgeData(data) {
-    // console.log("LoadAgeData");
+function BuildChartAge(data) {
+    // console.log("BuildChartAge");
     var data_source = GetAgeData(data);
     var options = BuildOptions("Age Distribution", 5, 5);
 
@@ -182,6 +185,7 @@ function GetDoughnutData(data, labels){
     return data_source;
 }
 
+
 // Disease Doughnut Chart
 function BuildDoughnutChart(chart, data, labels, title) {
     var data_source = GetDoughnutData(data, labels);
@@ -196,19 +200,20 @@ function BuildDoughnutChart(chart, data, labels, title) {
     return new Chart(chart, config);
 }
 
-function LoadHeartDiseaseData(data) {
+function BuildChartHeartDisease(data) {
     var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
     var title = 'Heart Disease';
     BuildDoughnutChart(html_chart_heart_disease, data, labels, title)
 }
 
-function LoadHypertensionData(data) {
+function BuildChartHypertension(data) {
     var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
     var title = 'Hypertension';
     return BuildDoughnutChart(html_chart_hypertension, data, labels, title)
 }
 
-// Get Disease data
+
+// Average Glucode Level Line Chart
 function GetAvgGlucodeLevelData(data)
 {
     var labels = BulidIntervalLabel(40, 260, 20);
@@ -229,11 +234,10 @@ function GetAvgGlucodeLevelData(data)
             tension: 0.1
         }]
     };
-    return data_source;
+    return data_source; 
 }
 
-// Average Glucode Level Line Chart
-function LoadAvgGlucodeLevelData(data) {
+function BuildChartAvgGlucodeLevel(data) {
 
     var data_source = GetAvgGlucodeLevelData(data);
     var options = BuildOptions('Average Glucode Level Distribution', 5, 5);
@@ -246,6 +250,7 @@ function LoadAvgGlucodeLevelData(data) {
 
     return new Chart(html_chart_avg_glucose_level, config);
 }
+
 
 // Bmi Bar Chart 
 function GetBmiConfig(data) {
@@ -273,7 +278,7 @@ function GetBmiConfig(data) {
     return config;
 }
 
-function LoadBmiData(data) {
+function BuildChartBmi(data) {
     const config = GetBmiConfig(data);
     return new Chart(html_chart_bmi, config);
 }
@@ -281,5 +286,15 @@ function LoadBmiData(data) {
 // Load Trigger
 window.onload = function () {
     ConnectElementId();
-    GetDataByAjax();
+    GetData();
+}
+
+
+/**
+ * Update Chart
+ */
+
+function UpdateChartByUserData()
+{
+    
 }
