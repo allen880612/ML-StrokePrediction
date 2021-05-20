@@ -1,3 +1,11 @@
+// html canvas element
+var html_chart_age;
+var html_chart_heart_disease;
+var html_chart_hypertension;
+var html_chart_avg_glucose_level;
+var html_chart_bmi;
+
+// Chart object
 var chart_age;
 var chart_heart_disease;
 var chart_hypertension;
@@ -7,11 +15,11 @@ var chart_bmi;
 // find element by id
 function ConnectElementId() {
     console.log("ConnectElementId");
-    chart_age = $("#chart_age");
-    chart_heart_disease = $("#chart_heart_disease");
-    chart_hypertension = $("#chart_hypertension");
-    chart_avg_glucose_level = $("#chart_avg_glucose_level");
-    chart_bmi = $("#chart_bmi");
+    html_chart_age = $("#chart_age");
+    html_chart_heart_disease = $("#chart_heart_disease");
+    html_chart_hypertension = $("#chart_hypertension");
+    html_chart_avg_glucose_level = $("#chart_avg_glucose_level");
+    html_chart_bmi = $("#chart_bmi");
 }
 
 // Load data from flask by JQuery Ajax
@@ -20,22 +28,27 @@ function LoadData(api, data) {
     // console.log("Ajax call LoadData: " + api);
     switch (api) {
         case "/age":
-            return LoadAgeData(data);
+            chart_age = LoadAgeData(data);
+            break;
 
         case "/heart_disease":
-            return LoadHeartDiseaseData(data);
+            chart_heart_disease = LoadHeartDiseaseData(data);
+            break;
 
         case "/hypertension":
-            return LoadHypertensionData(data);
+            chart_hypertension = LoadHypertensionData(data);
+            break;
 
         case "/avg_glucose_level":
-            return LoadAvgGlucodeLevelData(data);
+            chart_avg_glucose_level = LoadAvgGlucodeLevelData(data);
+            break;
 
         case "/bmi":
-            return LoadBmiData(data);
+            chart_bmi = LoadBmiData(data);
+            break;
 
         default:
-            return false;
+            console.error("Unknow Api Called!");
     }
 }
 
@@ -66,8 +79,8 @@ function GetData(api) {
     }
 }
 
-function LoadDataByAjax() {
-    // console.log("LoadDataByAjax");
+function GetDataByAjax() {
+    // console.log("GetDataByAjax");
 
     GetData("/age");
     GetData("/heart_disease");
@@ -85,6 +98,8 @@ function BulidIntervalLabel(start, end, step) {
     }
     return labels;
 }
+
+// Config Builder
 
 function BuildOptions(title, padding_top, padding_bottom) {
 
@@ -140,8 +155,7 @@ function LoadAgeData(data) {
         options: options
     }
 
-    new Chart(chart_age, config);
-    return true;
+    return new Chart(html_chart_age, config);
 }
 
 function GetDoughnutData(data, labels){
@@ -179,19 +193,19 @@ function BuildDoughnutChart(chart, data, labels, title) {
         options: options
     };
 
-    new Chart(chart, config);
+    return new Chart(chart, config);
 }
 
 function LoadHeartDiseaseData(data) {
     var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
     var title = 'Heart Disease';
-    BuildDoughnutChart(chart_heart_disease, data, labels, title)
+    BuildDoughnutChart(html_chart_heart_disease, data, labels, title)
 }
 
 function LoadHypertensionData(data) {
     var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
     var title = 'Hypertension';
-    BuildDoughnutChart(chart_hypertension, data, labels, title)
+    return BuildDoughnutChart(html_chart_hypertension, data, labels, title)
 }
 
 // Get Disease data
@@ -230,9 +244,10 @@ function LoadAvgGlucodeLevelData(data) {
         options: options
     };
 
-    new Chart(chart_avg_glucose_level, config);
+    return new Chart(html_chart_avg_glucose_level, config);
 }
 
+// Bmi Bar Chart 
 function GetBmiConfig(data) {
     var data_source = {};
     data_source.labels = BulidIntervalLabel(10, 60, 5);
@@ -260,12 +275,11 @@ function GetBmiConfig(data) {
 
 function LoadBmiData(data) {
     const config = GetBmiConfig(data);
-    new Chart(chart_bmi, config);
-    return true;
+    return new Chart(html_chart_bmi, config);
 }
 
 // Load Trigger
 window.onload = function () {
     ConnectElementId();
-    LoadDataByAjax();
+    GetDataByAjax();
 }
