@@ -50,7 +50,7 @@ function GetData(api) {
             url: api,
             dataType: "text",
             success: function (data) {
-                alert("success " + data);
+                // alert("success " + data);
                 console.log(data);
                 response = data;
             },
@@ -86,30 +86,53 @@ function BulidIntervalLabel(start, end, step) {
     return labels;
 }
 
-// Age bar chart
-function LoadAgeData(data) {
-    // console.log("LoadAgeData");
+function BuildOptions(title, padding_top, padding_bottom) {
+
+    var options = {
+        plugins: {
+            title: {
+                display: true,
+                text: title,
+                padding: {
+                    top: padding_top,
+                    bottom: padding_bottom
+                },
+                font:{
+                    weight: 'bold',
+                    size: 24,
+                },
+                color : "#000000"
+            }
+        }
+    };
+
+    return options;
+}
+
+function GetAgeData(data)
+{
     var data_source = {};
     data_source.labels = BulidIntervalLabel(0, 100, 10);
     data_source.datasets = [];
     data_source.datasets.push({
-        label: "Healthy Pecentage(%)",
+        label: "Healthy People(%)",
         backgroundColor: "#46BFBD",
         data: data.healthy
     });
     data_source.datasets.push({
-        label: "Stroke Pecentage(%)",
+        label: "Stroke People(%)",
         backgroundColor: "#F7464A",
         data: data.stroke
     });
 
-    var options = {
-        legend: { display: true },
-        title: {
-            display: true,
-            text: 'Age population - Stroke percentage'
-        }
-    };
+    return data_source;
+}
+
+// Age bar chart
+function LoadAgeData(data) {
+    // console.log("LoadAgeData");
+    var data_source = GetAgeData(data);
+    var options = BuildOptions("Age Distribution", 5, 5);
 
     var config = {
         type: 'bar',
@@ -118,20 +141,20 @@ function LoadAgeData(data) {
     }
 
     new Chart(chart_age, config);
-
     return true;
 }
 
-// Disease Doughnut Chart
-function BuildDoughnutChart(chart, data, labels, title) {
+function GetDoughnutData(data, labels){
+    var data_source = {};
+    data_source.labels = labels;
+    data_source.datasets = [];
+
     var colors = [
         "#F7464A",
         "#46BFBD",
         "#000000",
         "#666666"
     ];
-
-    var datasets = [];
     var healthy_data = {
         data: [data.healthy_disease, data.healthy_not_disease, 0, 0],
         backgroundColor: colors
@@ -140,43 +163,42 @@ function BuildDoughnutChart(chart, data, labels, title) {
         data: [0, 0, data.stroke_disease, data.stroke_not_disease],
         backgroundColor: colors
     };
-    datasets.push(healthy_data, stroke_data);
+    data_source.datasets.push(healthy_data, stroke_data);
 
-    var options = {
-        legend: { display: true },
-        title: {
-            display: true,
-            text: title
-        }
+    return data_source;
+}
+
+// Disease Doughnut Chart
+function BuildDoughnutChart(chart, data, labels, title) {
+    var data_source = GetDoughnutData(data, labels);
+    var options = BuildOptions(title, 5, 5);
+
+    const config = {
+        type: 'doughnut',
+        data: data_source,
+        options: options
     };
 
-    new Chart(chart,
-        {
-            type: 'doughnut',
-            options: options,
-            data: {
-                datasets: datasets,
-                labels: labels
-            }
-        })
+    new Chart(chart, config);
 }
 
 function LoadHeartDiseaseData(data) {
-    var labels = ["Healthy have disease(%)", "Healthy not have disease(%)", "Stroke have disease(%)", "Stroke not have disease(%)"];
-    var title = 'Have heart disease';
+    var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
+    var title = 'Heart Disease';
     BuildDoughnutChart(chart_heart_disease, data, labels, title)
 }
 
 function LoadHypertensionData(data) {
-    var labels = ["Healthy have disease(%)", "Healthy not have disease(%)", "Stroke have disease(%)", "Stroke not have disease(%)"];
-    var title = 'Have hypertension';
+    var labels = ["Healthy have(%)", "Healthy NOT have(%)", "Stroke have(%)", "Stroke NOT have(%)"];
+    var title = 'Hypertension';
     BuildDoughnutChart(chart_hypertension, data, labels, title)
 }
 
-// Average Glucode Level Line Chart
-function LoadAvgGlucodeLevelData(data) {
+// Get Disease data
+function GetAvgGlucodeLevelData(data)
+{
     var labels = BulidIntervalLabel(40, 260, 20);
-    var data = {
+    var data_source = {
         labels: labels,
         datasets: [{
             label: 'Healthy People(%)',
@@ -193,79 +215,52 @@ function LoadAvgGlucodeLevelData(data) {
             tension: 0.1
         }]
     };
+    return data_source;
+}
+
+// Average Glucode Level Line Chart
+function LoadAvgGlucodeLevelData(data) {
+
+    var data_source = GetAvgGlucodeLevelData(data);
+    var options = BuildOptions('Average Glucode Level Distribution', 5, 5);
 
     const config = {
         type: 'line',
-        data: data,
+        data: data_source,
+        options: options
     };
 
     new Chart(chart_avg_glucose_level, config);
 }
 
-function GetBmiConfig(data)
-{
+function GetBmiConfig(data) {
     var data_source = {};
     data_source.labels = BulidIntervalLabel(10, 60, 5);
     data_source.datasets = [];
     data_source.datasets.push({
-        label: "Healthy Pecentage(%)",
+        label: "Healthy People(%)",
         backgroundColor: "#46BFBD",
         data: data.healthy
     });
     data_source.datasets.push({
-        label: "Stroke Pecentage(%)",
+        label: "Stroke People(%)",
         backgroundColor: "#F7464A",
         data: data.stroke
     });
 
-    var options = {
-        legend: { display: true },
-        title: {
-            display: true,
-            text: 'BMI Percentage'
-        }
-    };
-
-    var config = {
+    var options = BuildOptions('BMI Distribution', 5, 5);
+    
+    const config = {
         type: 'bar',
         data: data_source,
         options: options
     }
-
-    new Chart(chart_bmi, config);
+    return config;
 }
 
 function LoadBmiData(data) {
-    var data_source = {};
-    data_source.labels = BulidIntervalLabel(0, 100, 10);
-    data_source.datasets = [];
-    data_source.datasets.push({
-        label: "Healthy Pecentage(%)",
-        backgroundColor: "#46BFBD",
-        data: data.healthy
-    });
-    data_source.datasets.push({
-        label: "Stroke Pecentage(%)",
-        backgroundColor: "#F7464A",
-        data: data.stroke
-    });
-
-    var options = {
-        legend: { display: true },
-        title: {
-            display: true,
-            text: 'Age population - Stroke percentage'
-        }
-    };
-
-    var config = {
-        type: 'bar',
-        data: data_source,
-        options: options
-    }
-
+    const config = GetBmiConfig(data);
     new Chart(chart_bmi, config);
-
     return true;
 }
 
