@@ -117,7 +117,7 @@ function BuildOptions(title, padding_top, padding_bottom) {
             legend: {
                 position: "top",
                 display: true,
-                align: "start"
+                align: "start",
             },
             title: {
                 display: true,
@@ -317,6 +317,7 @@ function UpdateBarChart(chart, index, length)
     }
 
     healthy_colors[index] = BLUE;
+    // deepcopy
     var stroke_colors = healthy_colors.filter(() => true);
     stroke_colors[index] = RED;
 
@@ -334,16 +335,18 @@ function UpdateLineChart(chart, index, length)
     }
 
     healthy_colors[index] = BLUE;
+    // deepcopy
     var stroke_colors = healthy_colors.filter(() => true);
     stroke_colors[index] = RED;
-
     
     chart.data.datasets[0].borderColor = healthy_colors;
+    chart.data.datasets[0].pointBackgroundColor = healthy_colors;
     chart.data.datasets[1].borderColor = stroke_colors;
+    chart.data.datasets[1].pointBackgroundColor = stroke_colors;
 
-    chart.data.datasets.forEach((dataset) => {
-        dataset.fill = true;
-    });
+    // chart.data.datasets.forEach((dataset) => {
+    //     dataset.fill = true;
+    // });
 
     chart.update();
 }
