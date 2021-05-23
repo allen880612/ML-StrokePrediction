@@ -5,7 +5,37 @@
 {% endblock css %}
 
 {% block content %}
-    
+<section class="projects-section bg-light" id="projects">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <div class="col-xl-7 col-lg-6"><img class="img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='asset/img/CorrelationHeatmap.png') }}" alt="..." /></div>
+            <div class="col-xl-5 col-lg-6">
+                <div class="featured-text text-center text-lg-left">
+                    <h4>Correlation Heatmap</h4>
+                    <p class="text-black-50 mb-0">Stroke has more relateionship with:<br>
+                        age, hypertension, heart disease, ever married.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Project One Row -->
+        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <div class="col-lg-12">
+                <canvas id=t_test_chart></canvas>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
+                            <h4 class="text-black">T-Test Result</h4>
+                            <p class="mb-0 text-black-50">Stroke has more relationship with ...</p>
+                            <hr class="d-none d-lg-block mb-0 ms-0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
 {% endblock content %}
 
 {% block js %}

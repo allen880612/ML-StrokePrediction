@@ -70,6 +70,11 @@ def avg_glucose_level():
     model = Model.ArrayModel(healthy, stroke)
     return json.dumps(model.__dict__)
 
+@app.route("/t_test")
+def t_test():
+    return Model.T_TestModel().toJson()
+    
+
 
 if __name__ == 'main':
     app.run(debug=True, use_debugger=True, use_reloader=True)
