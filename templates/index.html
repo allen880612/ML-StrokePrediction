@@ -2,12 +2,220 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modalValidation.css') }}">
 {% endblock css %}
 
 {% block content %}
+<div class="py-5">
+    <div class="container">
+
+      <div class="row">
+        <div class="col card m-2 p-2">
+            <canvas id="gender_chart"></canvas>
+        </div>
+        <div class="col card m-2 p-2">
+            <canvas id="ever_married_chart"></canvas>
+        </div>
+        <div class="col card m-2 p-2">
+            <canvas id="residence_type_chart"></canvas>
+        </div>         
+      </div>
+
+      <hr class="mt-4 mb-4">
+
+      <div class="row justify-content-center">
+        <div class="col-5 card m-2 p-2">
+            <canvas id="work_type_chart"></canvas>
+        </div>
+        <div class="col-5 card m-2 p-3">
+            <canvas id="smoking_status_chart"></canvas>
+        </div>        
+      </div>
+
+      <div class="row m-3 justify-content-center">
+        <button class="col-1 btn btn-primary" data-bs-toggle="modal" data-bs-target="#personalInfoModal">AI Predict</button>
+      </div>
+
+      <hr class="mt-4 mb-4">
+
+      <div class="row justify-content-center" style="display: none;"  id="prediction_result">
+        <h3 class="card-title text-center p-2">Prediction Result</h3>
+        <div class="col card m-4 p-5">
+            <canvas id="predict_chart"></canvas>
+        </div>
+        <div class="col card m-4 p-2">
+          <div class="card-body p-5">
+            <h4 class="text-center">Personal Information</h4>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="col-2">Gender : </td>
+                  <td class="col-3" id="gender"></td>
+                </tr>
+                <tr>
+                  <td>Age : </td>
+                  <td id="age"></td>
+                </tr>
+                <tr>
+                  <td>BMI : </td>
+                  <td id="bmi"></td>
+                </tr>
+                <tr>
+                  <td>Glucose Level : </td>
+                  <td id="avg_glucose_level"></td>
+                </tr>
+                <tr>
+                  <td>Hypertension : </td>
+                  <td id="hypertension"></td>
+                </tr>
+                <tr>
+                  <td>Heart Disease : </td>
+                  <td id="heart_disease"></td>
+                </tr>
+                <tr>
+                  <td>Ever Married : </td>
+                  <td id="ever_married"></td>
+                </tr>
+                <tr>
+                  <td>Work Type : </td>
+                  <td id="work_type"></td>
+                </tr>
+                <tr>
+                  <td>Residence Type : </td>
+                  <td id="Residence_type"></td>
+                </tr>
+                <tr>
+                  <td>Smoking Status : </td>
+                  <td id="smoking_status"></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <span class="fs-5">Prevalence of Stroke : </span>
+            <span class="fs-5" id="stroke_rate"></span>
+          </div>
+        </div>         
+      </div>
+       
+    </div>
     
+</div>
+
+<div class="modal fade" id="personalInfoModal" tabindex="-1" aria-labelledby="personalInfoModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="personalInfoModalLabel">Personal Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="personalInfoForm">
+
+            <div class="form-group">                    
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="age_input" class="col-form-label">Age:</label>
+                        <input type="number" class="form-control" id="age_input" onchange="OnAgeValueChange(this.value)">
+                        <span class="warning" id="age_hint">Input Required</span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="bmi_input" class="col-form-label">BMI:</label>
+                        <input type="number" class="form-control" id="bmi_input" onchange="OnBmiValueChange(this.value)">
+                        <div class="invalid-feedback">Please enter bmi</div>
+                        <span class="warning" id="bmi_hint">Input Required</span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="glucose_input" class="col-form-label">Glucose Level:</label>
+                        <input type="number" class="form-control" id="glucose_input" onchange="OnGlucoseValueChange(this.value)">
+                        <div class="invalid-feedback">Please enter glucose level</div>
+                        <span class="warning" id="glucose_hint">Input Required</span>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="gender_option" class="col-form-label">Gender:</label>
+                        <select class="form-select" id="gender_option" onchange="OnGenderValueChange(this.value)">
+                          <option value="" selected>--Select--</option>
+                          <option value="1">Male</option>
+                          <option value="0">Female</option>
+                        </select>
+                        <span class="warning" id="gender_hint">Please Select Gender</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="smoking_status_option" class="col-form-label">Smoking Stauts:</label>
+                        <select class="form-select" id="smoking_status_option" onchange="OnSmokingValueChange(this.value)">
+                          <option value="" selected>--Select--</option>
+                          <option value="0">Formerly Smoked</option>
+                          <option value="1">Smokes</option>                              
+                          <option value="2">Never Smoked</option>
+                          <option value="3">Unknown</option>
+                        </select>
+                        <span class="warning" id="smoking_hint">Please Select Smoking Status</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="work_type_option" class="col-form-label">Work Type:</label>
+                        <select class="form-select" id="work_type_option" onchange="OnWorkTypeValueChange(this.value)">
+                          <option value="" selected>--Select--</option>
+                          <option value="0">Govt Job</option>
+                          <option value="1">Self Employed</option>
+                          <option value="2">Private</option>
+                          <option value="3">Children</option>
+                          <option value="4">Never Worked</option>
+                        </select>
+                        <span class="warning" id="work_hint">Please Select Work Type</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="residence_type_option" class="col-form-label">Residence Type:</label>
+                        <select class="form-select" id="residence_type_option" onchange="OnResidenceTypeValueChange(this.value)">
+                          <option value="" selected>--Select--</option>
+                          <option value="0">Urban</option>
+                          <option value="1">Rural</option>
+                        </select>
+                        <span class="warning" id="residence_hint">Please Select Residence Type</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="hypertension_check">
+                    <label class="form-check-label" for="hypertension_check">Hypertension</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="heart_disease_check">
+                    <label class="form-check-label" for="heart_disease_check">Heart Disease</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ever_married_check">
+                    <label class="form-check-label" for="ever_married_check">Ever Married</label>
+                </div>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="OnPredictClick()">Predict</button>
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock content %}
 
 {% block js %}
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modalValidation.js') }}"></script>
 {% endblock js %}
