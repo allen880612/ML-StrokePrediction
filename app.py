@@ -24,6 +24,9 @@ static_folder = os.path.join(os.getcwd(), 'static')
 app = Flask(__name__, template_folder=template_folder,
             static_folder=static_folder)
 
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path, mimetype='text/css')
@@ -269,4 +272,4 @@ def get_logistic_regression_importance():
 
 
 if __name__ == 'main':
-    app.run()
+    app.run(debug=True, use_debugger=True, use_reloader=True)
