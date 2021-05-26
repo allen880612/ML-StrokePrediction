@@ -213,10 +213,10 @@ def get_hypertension():
     stroke_len = len(patients.loc[patients.stroke])
 
     res = {
-        "healthy_hypertension":100*sum((patients.hypertension==1) & (~patients.stroke))/healthy_len,
-        "healthy_not_hypertension":100*sum((patients.hypertension==0) & (~patients.stroke))/healthy_len,
-        "stroke_hypertension":100*sum((patients.hypertension==1) & (patients.stroke))/stroke_len,
-        "stroke_not_hypertension":100*sum((patients.hypertension==0) & (~patients.stroke))/stroke_len,
+        "healthy_disease":100*sum((patients.hypertension==1) & (~patients.stroke))/healthy_len,
+        "healthy_not_disease":100*sum((patients.hypertension==0) & (~patients.stroke))/healthy_len,
+        "stroke_disease":100*sum((patients.hypertension==1) & (patients.stroke))/stroke_len,
+        "stroke_not_disease":100*sum((patients.hypertension==0) & (~patients.stroke))/stroke_len,
     }
 
     return json.dumps(res)

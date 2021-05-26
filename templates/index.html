@@ -32,6 +32,30 @@
         </div>        
       </div>
 
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <canvas id="chart_age"></canvas>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <canvas id="chart_heart_disease"></canvas>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <canvas id="chart_hypertension"></canvas>
+            </div>
+        </div>
+      
+        <div class="row">
+            <div class="col-lg-6">
+                <canvas id="chart_avg_glucose_level"></canvas>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="chart_bmi"></canvas>
+            </div>
+        </div>
+      
+      </div>
+
       <div class="row m-3 justify-content-center">
         <button class="col-1 btn btn-primary" data-bs-toggle="modal" data-bs-target="#personalInfoModal">AI Predict</button>
       </div>
@@ -100,6 +124,9 @@
     </div>
     
 </div>
+
+
+
 
 <div class="modal fade" id="personalInfoModal" tabindex="-1" aria-labelledby="personalInfoModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
@@ -214,29 +241,6 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <canvas id="chart_age"></canvas>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <canvas id="chart_heart_disease"></canvas>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <canvas id="chart_hypertension"></canvas>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6">
-            <canvas id="chart_avg_glucose_level"></canvas>
-        </div>
-        <div class="col-lg-6">
-            <canvas id="chart_bmi"></canvas>
-        </div>
-    </div>
-
-</div>
 
 {% endblock content %}
 

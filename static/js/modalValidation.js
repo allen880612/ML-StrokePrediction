@@ -118,6 +118,7 @@ function ShowPersonalInfo(){
 
 //點擊Predict按鈕的觸發事件
 function OnPredictClick(){
+    console.log("predict");
     var age = $("#age_input").val();
     var bmi = $("#bmi_input").val();
     var glucose = $("#glucose_input").val();
@@ -162,17 +163,17 @@ function OnPredictClick(){
 
         //獲取預測結果並更新圖表及資訊
         $.getJSON(
-            '/test',
+            '/predict',
             personalInfoData,
             function(data) {
-                //test            
-                var ranNum = Math.floor(Math.random()*100)+1;
                 predictChart.data.datasets[0].data[0] = ranNum;
                 predictChart.data.datasets[0].data[1] = 100-ranNum;
                 $("#stroke_rate").text(ranNum + '%');
                 Update();
                 //test
         });
+
+        
         ShowPersonalInfo();
         
         $("#personalInfoModal").modal('hide');

@@ -3,8 +3,7 @@ var marriedData;
 var residenceData;
 var workData;
 var smokingData;
-
-GetPieData(); 
+GetPieData();
 
 var genderLabel = ['Stroke-Female','NoStroke-Female',
                     'Stroke-Male', 'NoStroke-Male' ];
@@ -115,7 +114,6 @@ var residenceChart = DrawPieChart('residence_type_chart','Residence Type',reside
 var workChart = DrawPieChart('work_type_chart','Work Type',workLabel,workData);
 var smokingChart = DrawPieChart('smoking_status_chart','Smoking Status',smokingLabel,smokingData);
 var predictChart = DrawPieChart('predict_chart','Prevalence',predictLabel,predictData);
-
 //畫圓餅圖
 function DrawPieChart(elementStr,title,label,data,){
     return new Chart(document.getElementById(elementStr).getContext('2d'), {
@@ -190,7 +188,7 @@ function GetData(url){
         url: url,
         method: 'get',
         success: function (data) {
-            t = data;
+            t = JSON.parse(data);
         }
     });
     return t;
@@ -230,13 +228,8 @@ function Update(){
   UpdateChart(residenceChart,2,$("#residence_type_option").val(),['rgba(0, 0, 255, 0.7)','rgba(0, 0, 255, 0.3)']);
   UpdateChart(workChart,5,$("#work_type_option").val(),['rgba(219, 115, 0, 0.7)','rgba(219, 115, 0, 0.3)']);
   UpdateChart(smokingChart,4,$("#smoking_status_option").val(),['rgba(255, 0, 255, 0.7)','rgba(255, 0, 255, 0.3)']);
+  UpdateChartByUserData();
 }
-// html canvas element
-var html_chart_age;
-var html_chart_heart_disease;
-var html_chart_hypertension;
-var html_chart_avg_glucose_level;
-var html_chart_bmi;
 
 // Chart object
 var chart_age;
@@ -244,23 +237,6 @@ var chart_heart_disease;
 var chart_hypertension;
 var chart_avg_glucose_level;
 var chart_bmi;
-
-// const color
-const BLUE  = "#46BFBD";
-const RED   = "#F7464A";
-const BLACK = "#000000";
-const GRAY  = "#666666";
-const GLOOMY  = "rgba(0, 0, 0, 0.1)";
-
-// find element by id
-function ConnectElementId() {
-    console.log("ConnectElementId");
-    html_chart_age = $("#chart_age");
-    html_chart_heart_disease = $("#chart_heart_disease");
-    html_chart_hypertension = $("#chart_hypertension");
-    html_chart_avg_glucose_level = $("#chart_avg_glucose_level");
-    html_chart_bmi = $("#chart_bmi");
-}
 
 /**
  * Load Data from Flask by JQury.ajax & Build Chart
@@ -306,7 +282,7 @@ function GetDataByAjax(api) {
             dataType: "text",
             success: function (data) {
                 // alert("success " + data);
-                console.log(data);
+                //console.log(data);
                 response = data;
             },
             error: function (jQRe) {
@@ -321,7 +297,7 @@ function GetDataByAjax(api) {
     }
 }
 
-function GetData() {
+function LoadData() {
     // console.log("GetDataByAjax");
 
     GetDataByAjax("/age");
@@ -363,7 +339,7 @@ function BuildOptions(title, padding_top, padding_bottom) {
                     weight: 'bold',
                     size: 24,
                 },
-                color: BLACK
+                color: "#000000"
             },
         }
     };
@@ -377,12 +353,12 @@ function GetAgeData(data) {
     data_source.datasets = [];
     data_source.datasets.push({
         label: "Healthy People(%)",
-        backgroundColor: BLUE,
+        backgroundColor: "#46BFBD",
         data: data.healthy
     });
     data_source.datasets.push({
         label: "Stroke People(%)",
-        backgroundColor: RED,
+        backgroundColor: "#F7464A",
         data: data.stroke
     });
 
@@ -392,8 +368,9 @@ function GetAgeData(data) {
 
 // Age bar chart
 function BuildChartAge(data) {
-    // console.log("BuildChartAge");
+    
     var data_source = GetAgeData(data);
+    //console.log(data_source);
     var options = BuildOptions("Age Distribution", 5, 5);
 
     var config = {
@@ -402,7 +379,7 @@ function BuildChartAge(data) {
         options: options
     }
 
-    return new Chart(html_chart_age, config);
+    return new Chart($("#chart_age"), config);
 }
 
 function GetDoughnutData(data, labels) {
@@ -411,10 +388,10 @@ function GetDoughnutData(data, labels) {
     data_source.datasets = [];
 
     var colors = [
-        RED,
-        BLUE,
-        BLACK,
-        GRAY
+        "#F7464A",
+        "#46BFBD",
+        "#000000",
+        "#666666"
     ];
     var healthy_data = {
         data: [data.healthy_disease, data.healthy_not_disease, 0, 0],
@@ -447,13 +424,14 @@ function BuildDoughnutChart(chart, data, labels, title) {
 function BuildChartHeartDisease(data) {
     var labels = ["Healthy have", "Healthy NOT have", "Stroke have", "Stroke NOT have"];
     var title = 'Heart Disease';
-    return BuildDoughnutChart(html_chart_heart_disease, data, labels, title)
+    return BuildDoughnutChart($("#chart_heart_disease"), data, labels, title)
 }
 
 function BuildChartHypertension(data) {
+    console.log(data);
     var labels = ["Healthy have", "Healthy NOT have", "Stroke have", "Stroke NOT have"];
     var title = 'Hypertension';
-    return BuildDoughnutChart(html_chart_hypertension, data, labels, title)
+    return BuildDoughnutChart($("#chart_hypertension"), data, labels, title);
 }
 
 
@@ -491,7 +469,7 @@ function BuildChartAvgGlucodeLevel(data) {
         options: options
     };
 
-    return new Chart(html_chart_avg_glucose_level, config);
+    return new Chart($("#chart_avg_glucose_level"), config);
 }
 
 
@@ -502,12 +480,12 @@ function GetBmiConfig(data) {
     data_source.datasets = [];
     data_source.datasets.push({
         label: "Healthy People(%)",
-        backgroundColor: BLUE,
+        backgroundColor: "#46BFBD",
         data: data.healthy
     });
     data_source.datasets.push({
         label: "Stroke People(%)",
-        backgroundColor: RED,
+        backgroundColor: "#F7464A",
         data: data.stroke
     });
 
@@ -523,7 +501,7 @@ function GetBmiConfig(data) {
 
 function BuildChartBmi(data) {
     const config = GetBmiConfig(data);
-    return new Chart(html_chart_bmi, config);
+    return new Chart($("#chart_bmi"), config);
 }
 
 
@@ -546,13 +524,13 @@ function UpdateBarChart(chart, index, length)
 {
     var healthy_colors = [];
     for (var i = 0; i < length; i++){
-        healthy_colors.push(GLOOMY);
+        healthy_colors.push("rgba(0, 0, 0, 0.1)");
     }
 
-    healthy_colors[index] = BLUE;
+    healthy_colors[index] = "#46BFBD";
     // deepcopy
     var stroke_colors = healthy_colors.filter(() => true);
-    stroke_colors[index] = RED;
+    stroke_colors[index] = "#F7464A";
 
     chart.data.datasets[0].backgroundColor = healthy_colors;
     chart.data.datasets[1].backgroundColor = stroke_colors;
@@ -564,13 +542,13 @@ function UpdateLineChart(chart, index, length)
 {
     var healthy_colors = [];
     for (var i = 0; i < length; i++){
-        healthy_colors.push(GLOOMY);
+        healthy_colors.push("rgba(0, 0, 0, 0.1)");
     }
 
-    healthy_colors[index] = BLUE;
+    healthy_colors[index] = "#46BFBD";
     // deepcopy
     var stroke_colors = healthy_colors.filter(() => true);
-    stroke_colors[index] = RED;
+    stroke_colors[index] = "#F7464A";
     
     chart.data.datasets[0].borderColor = healthy_colors;
     chart.data.datasets[0].pointBackgroundColor = healthy_colors;
@@ -593,14 +571,14 @@ function UpdateChartAge(age)
 
 function UpdateChartDisease(chart, haveDisease)
 {
-    var colors = [RED, BLUE, BLACK, GRAY];
+    var colors = ["#F7464A", "#46BFBD", "#000000", "#666666"];
 
     if (haveDisease){
-        colors[0] = GLOOMY;
-        colors[2] = GLOOMY;
+        colors[0] = "rgba(0, 0, 0, 0.1)";
+        colors[2] = "rgba(0, 0, 0, 0.1)";
     }else{
-        colors[1] = GLOOMY;
-        colors[3] = GLOOMY;
+        colors[1] = "rgba(0, 0, 0, 0.1)";
+        colors[3] = "rgba(0, 0, 0, 0.1)";
     }
     
     console.log(chart);
@@ -633,22 +611,14 @@ function UpdateChartByUserData() {
     var has_hypertension = $("#hypertension_check").is(':checked')
     var has_heart_disease = $("#heart_disease_check").is(':checked')
 
-    // UpdateChartAge(age);
-    // UpdateChartDisease(chart_heart_disease, has_heart_disease);
-    // UpdateChartDisease(chart_hypertension, has_hypertension);
-    // UpdateChartAvgGlucodeLevel(avg_glucose);
-    // UpdateChartBmi(bmi);
-
-    UpdateChartAge(32);
-    UpdateChartDisease(chart_heart_disease, true);
-    UpdateChartDisease(chart_hypertension, false);
-    UpdateChartAvgGlucodeLevel(82);
-    UpdateChartBmi(40);
+    UpdateChartAge(age);
+    UpdateChartDisease(chart_heart_disease, has_heart_disease);
+    UpdateChartDisease(chart_hypertension, has_hypertension);
+    UpdateChartAvgGlucodeLevel(avg_glucose);
+    UpdateChartBmi(bmi);
 }
 
 // Load Trigger
 window.onload = function () {
-    ConnectElementId();
-    GetData();
-    UpdateChartByUserData();
+    LoadData();
 };
