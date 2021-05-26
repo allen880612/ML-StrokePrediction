@@ -115,6 +115,7 @@ var workChart = DrawPieChart('work_type_chart','Work Type',workLabel,workData);
 var smokingChart = DrawPieChart('smoking_status_chart','Smoking Status',smokingLabel,smokingData);
 var predictChart = DrawPieChart('predict_chart','Prevalence',predictLabel,predictData);
 //畫圓餅圖
+
 function DrawPieChart(elementStr,title,label,data,){
     return new Chart(document.getElementById(elementStr).getContext('2d'), {
         type: 'pie',
