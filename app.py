@@ -35,6 +35,7 @@ def root():
 
 
 @app.route("/index")
+@app.route("/")		######test
 def index():
     return render_template("index.html")
 
