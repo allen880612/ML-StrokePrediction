@@ -1,9 +1,3 @@
-html_t_test_chart = $("#t_test_chart");
-
-// const color
-const BLUE  = "#46BFBD";
-const BLACK = "#000000";
-
 /**
  * Load Data from Flask by JQury.ajax & Build Chart
  */
@@ -47,7 +41,7 @@ function GetDataByAjax(api) {
     }
 }
 
-function GetData() {
+function LoadData() {
     GetDataByAjax("/t_test");
 }
 
@@ -72,7 +66,7 @@ function BuildOptions(title, padding_top, padding_bottom) {
                     weight: 'bold',
                     size: 24,
                 },
-                color: BLACK
+                color: "#000000"
             },
         }
     };
@@ -104,7 +98,7 @@ function GetT_TestData(data) {
     data_source.datasets = [];
     data_source.datasets.push({
         label: "log(pValue)",
-        backgroundColor: BLUE,
+        backgroundColor: "#46BFBD",
         data: values
     });
 
@@ -124,11 +118,11 @@ function BuildChartT_Test(data) {
         data: data_source,
         options: options
     }
-    new Chart(html_t_test_chart, config)
+    new Chart($("#t_test_chart"), config)
 }
    
 
 // Load Trigger
 window.onload = function () {
-    GetData();
+    LoadData();
 }
