@@ -393,6 +393,19 @@ function UpdateChartBmi(bmi)
 }
 
 function UpdateChartByUserData() {
+
+    var age = $("#age_input").val()
+    var bmi = $("#bmi_input").val()
+    var avg_glucose = $("#glucose_input").val()
+    var has_hypertension = $("#hypertension_check").is(':checked')
+    var has_heart_disease = $("#heart_disease_check").is(':checked')
+
+    // UpdateChartAge(age);
+    // UpdateChartDisease(chart_heart_disease, has_heart_disease);
+    // UpdateChartDisease(chart_hypertension, has_hypertension);
+    // UpdateChartAvgGlucodeLevel(avg_glucose);
+    // UpdateChartBmi(bmi);
+
     UpdateChartAge(32);
     UpdateChartDisease(chart_heart_disease, true);
     UpdateChartDisease(chart_hypertension, false);
