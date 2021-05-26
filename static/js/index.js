@@ -230,6 +230,7 @@ function Update(){
   UpdateChart(residenceChart,2,$("#residence_type_option").val(),['rgba(0, 0, 255, 0.7)','rgba(0, 0, 255, 0.3)']);
   UpdateChart(workChart,5,$("#work_type_option").val(),['rgba(219, 115, 0, 0.7)','rgba(219, 115, 0, 0.3)']);
   UpdateChart(smokingChart,4,$("#smoking_status_option").val(),['rgba(255, 0, 255, 0.7)','rgba(255, 0, 255, 0.3)']);
+}
 // html canvas element
 var html_chart_age;
 var html_chart_heart_disease;
@@ -650,4 +651,4 @@ window.onload = function () {
     ConnectElementId();
     GetData();
     UpdateChartByUserData();
-}
+};
