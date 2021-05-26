@@ -21,7 +21,7 @@
     <!-- Project One Row -->
     <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
         <div class="col-lg-10">
-            <canvas id=t_test_chart></canvas>
+            <canvas id="t_test_chart"></canvas>
         </div>
         <div class="col-lg-2">
             <div class="bg-black text-center h-100 project">
@@ -35,8 +35,15 @@
             </div>
         </div>
     </div>
-    {% endblock content %}
 
-    {% block js %}
-    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
-    {% endblock js %}
+<div class="row">
+    <div class="col-6 card m-2 p-2">
+        <canvas id="importance_chart"></canvas>
+    </div>      
+</div>
+    
+{% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/data.js') }}"></script>
+{% endblock js %}
