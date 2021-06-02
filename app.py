@@ -122,11 +122,11 @@ def test_get_data():
 @app.route("/predict", methods=['GET'])
 def get_predict():
 
-    age = [request.args["age"]]
+    age = [float(request.args["age"])]
     hypertension = [1 if request.args["hypertension"] else 0]
     heart_disease = [1 if request.args["heart_disease"] else 0]
-    avg_glucose_level = [request.args["avg_glucose_level"]]
-    bmi = [request.args["bmi"]]
+    avg_glucose_level = [float(request.args["avg_glucose_level"])]
+    bmi = [float(request.args["bmi"])]
 
     if(request.args["work_type"]==0):
         work_type=[1, 0, 0, 0, 0]
