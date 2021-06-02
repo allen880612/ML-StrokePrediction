@@ -118,7 +118,6 @@ function ShowPersonalInfo(){
 
 //點擊Predict按鈕的觸發事件
 function OnPredictClick(){
-    console.log("predict");
     var age = $("#age_input").val();
     var bmi = $("#bmi_input").val();
     var glucose = $("#glucose_input").val();
@@ -166,12 +165,11 @@ function OnPredictClick(){
             '/predict',
             personalInfoData,
             function(data) {
-                data = data["result"]*100
+                data = data["result"]*100;
                 predictChart.data.datasets[0].data[0] = data;
                 predictChart.data.datasets[0].data[1] = 100-data;
-                $("#stroke_rate").text(data + '%');
+                $("#stroke_rate").text(data.toFixed(2) + '%');
                 Update();
-                //test
         });
 
         
