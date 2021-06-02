@@ -174,7 +174,7 @@ def get_predict():
               'Residence_type_Rural', 'Residence_type_Urban']).T
     
     res = {
-        "result": age+hypertension+heart_disease+avg_glucose_level+bmi+work_type+smoking_status+gender+ever_married+Residence_type
+        "result": float(model.predict_proba(data)[0][1])
     }
     return json.dumps(res)
 
