@@ -117,48 +117,48 @@ def get_smoking():
 
 @app.route("/test_get_data", methods=["GET"])
 def test_get_data():
-    return json.dumps(request.data)
+    return json.dumps(request.args)
 
 @app.route("/predict", methods=['GET'])
 def get_predict():
 
-    age = [request.form["age"]]
-    hypertension = [1 if request.form["hypertension"] else 0]
-    heart_disease = [1 if request.form["heart_disease"] else 0]
-    avg_glucose_level = [request.form["avg_glucose_level"]]
-    bmi = [request.form["bmi"]]
+    age = [request.args["age"]]
+    hypertension = [1 if request.args["hypertension"] else 0]
+    heart_disease = [1 if request.args["heart_disease"] else 0]
+    avg_glucose_level = [request.args["avg_glucose_level"]]
+    bmi = [request.args["bmi"]]
 
-    if(request.form["work_type"]==0):
+    if(request.args["work_type"]==0):
         work_type=[1, 0, 0, 0, 0]
-    elif(request.form["work_type"]==1):
+    elif(request.args["work_type"]==1):
         work_type=[0, 1, 0, 0, 0]
-    elif(request.form["work_type"]==2):
+    elif(request.args["work_type"]==2):
         work_type=[0, 0, 1, 0, 0]
-    elif(request.form["work_type"]==3):
+    elif(request.args["work_type"]==3):
         work_type=[0, 0, 0, 1, 0]
     else:
         work_type=[0, 0, 0, 0, 1]
 
-    if(request.form["smoking_status"]==0):
+    if(request.args["smoking_status"]==0):
         smoking_status = [1, 0, 0, 0]
-    elif(request.form["smoking_status"]==1):
+    elif(request.args["smoking_status"]==1):
         smoking_status = [0, 1, 0, 0]
-    elif(request.form["smoking_status"]==2):
+    elif(request.args["smoking_status"]==2):
         smoking_status = [0, 0, 1, 0]
     else:
         smoking_status = [0, 0, 0, 1]
 
-    if(request.form["gender"]==0):
+    if(request.args["gender"]==0):
         gender = [1, 0, 0]
     else:
         gender = [0, 1, 0]
 
-    if(request.form["ever_married"]):
+    if(request.args["ever_married"]):
         ever_married = [0, 1]
     else:
         ever_married = [1, 0]
 
-    if(request.form["Residence_type"]==0):
+    if(request.args["Residence_type"]==0):
         Residence_type = [1, 0]
     else:
         Residence_type = [0, 1]
@@ -174,7 +174,7 @@ def get_predict():
               'Residence_type_Rural', 'Residence_type_Urban']).T
     
     res = {
-        "result":model.predict_proba(data)[0][1]
+        "result": float(model.predict_proba(data)[0][1])
     }
     return json.dumps(res)
 
