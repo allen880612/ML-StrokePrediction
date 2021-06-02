@@ -166,9 +166,10 @@ function OnPredictClick(){
             '/predict',
             personalInfoData,
             function(data) {
-                predictChart.data.datasets[0].data[0] = ranNum;
-                predictChart.data.datasets[0].data[1] = 100-ranNum;
-                $("#stroke_rate").text(ranNum + '%');
+                data = data["result"]*100
+                predictChart.data.datasets[0].data[0] = data;
+                predictChart.data.datasets[0].data[1] = 100-data;
+                $("#stroke_rate").text(data + '%');
                 Update();
                 //test
         });
