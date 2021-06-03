@@ -429,7 +429,6 @@ function BuildChartHeartDisease(data) {
 }
 
 function BuildChartHypertension(data) {
-    console.log(data);
     var labels = ["Healthy have", "Healthy NOT have", "Stroke have", "Stroke NOT have"];
     var title = 'Hypertension';
     return BuildDoughnutChart($("#chart_hypertension"), data, labels, title);
@@ -582,7 +581,6 @@ function UpdateChartDisease(chart, haveDisease)
         colors[3] = "rgba(0, 0, 0, 0.1)";
     }
     
-    console.log(chart);
     chart.data.datasets.forEach((dataset) => {
         dataset.backgroundColor = colors;
     });
