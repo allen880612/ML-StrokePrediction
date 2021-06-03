@@ -41,10 +41,25 @@
         </div>
     </div>
 
-<div class="row">
-    <div class="col-6 card m-2 p-2">
-        <canvas id="importance_chart"></canvas>
-    </div>      
+    <br>
+    <!-- Feature Importance Chart-->
+    <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <div class="col-xl-9 card m-2 p-2">
+            <canvas id="importance_chart"></canvas>
+        </div>
+        <div class="col-xl-2 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+                <h2>Logistic Regression</h2>
+                <p class="mb-0 text-black-60">
+                    <br>
+                    Stroke has more relateionship with:<br>
+                    age, work type, hypertension, <br>
+                    smoking status, heart disease
+                </p>
+            </div>
+        </div>
+    </div>
+
 </div>
     
 {% endblock content %}

@@ -173,35 +173,26 @@ function DrawImportanceChart()
                 display: true,
                 text: "Feature Importance",
                 font: {
-                    size: 26
-                }
+                    size: 28
+                },
+                color:'black'
             }
         },
         scales: {
-          xAxes: [{
-            ticks: {
-              maxRotation: 90,
-              minRotation: 80
-            },
-              gridLines: {
-              offsetGridLines: true 
-            }
-          },
-          {
-            position: "top",
-            ticks: {
-              maxRotation: 90,
-              minRotation: 80
-            },
-            gridLines: {
-              offsetGridLines: true 
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+            yAxes: [{
+                ticks: {
+                    fontColor: "black",
+                    fontSize: 14,
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "black",
+                    fontSize: 14,
+                    beginAtZero: true
+                }
+            }]
         }
       }
     });
