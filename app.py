@@ -86,17 +86,18 @@ def get_residence():
 @app.route("/work", methods=['GET'])
 def get_work():
     res = {
-        "childStroke":sum((patients.work_type=="children") & (patients.stroke)),
-        "childNoStroke":sum((patients.work_type=="children") & (~patients.stroke)),
+        "childrenStroke":sum((patients.work_type=="children") & (patients.stroke)),
+        "childrenNoStroke":sum((patients.work_type=="children") & (~patients.stroke)),
         "privateStroke":sum((patients.work_type=="Private") & (patients.stroke)),
         "privateNoStroke":sum((patients.work_type=="Private") & (~patients.stroke)),
         "selfStroke":sum((patients.work_type=="Self-employed") & (patients.stroke)),
         "selfNoStroke":sum((patients.work_type=="Self-employed") & (~patients.stroke)),
-        "govStroke":sum((patients.work_type=="Govt_job ") & (patients.stroke)),
-        "govNoStroke":sum((patients.work_type=="Govt_job ") & (~patients.stroke)),
+        "govtStroke":sum((patients.work_type=="Govt_job") & (patients.stroke)),
+        "govtNoStroke":sum((patients.work_type=="Govt_job") & (~patients.stroke)),
         "neverStroke":sum((patients.work_type=="Never_worked") & (patients.stroke)),
         "neverNoStroke":sum((patients.work_type=="Never_worked") & (~patients.stroke))
     }
+    print(res)
     return json.dumps(res)
 
 @app.route("/smoking", methods=['GET'])
@@ -108,8 +109,8 @@ def get_smoking():
         "formerlyNoStroke":sum((patients.smoking_status=="formerly smoked") & (~patients.stroke)),
         "neverStroke":sum((patients.smoking_status=="never smoked") & (patients.stroke)),
         "neverNoStroke":sum((patients.smoking_status=="never smoked") & (~patients.stroke)),
-        "unknownStroke":sum((patients.smoking_status=="Unknown ") & (patients.stroke)),
-        "unknownNoStroke":sum((patients.smoking_status=="Unknown ") & (~patients.stroke)),
+        "unknownStroke":sum((patients.smoking_status=="Unknown") & (patients.stroke)),
+        "unknownNoStroke":sum((patients.smoking_status=="Unknown") & (~patients.stroke)),
         
     }
     return json.dumps(res)
@@ -148,11 +149,11 @@ def get_t_test_result():
 @app.route("/predict", methods=['GET'])
 def get_predict():
 
-    age = [request.args["age"]]
+    age = [float(request.args["age"])]
     hypertension = [1 if request.args["hypertension"] else 0]
     heart_disease = [1 if request.args["heart_disease"] else 0]
-    avg_glucose_level = [request.args["avg_glucose_level"]]
-    bmi = [request.args["bmi"]]
+    avg_glucose_level = [float(request.args["avg_glucose_level"])]
+    bmi = [float(request.args["bmi"])]
 
     if(request.args["work_type"]==0):
         work_type=[1, 0, 0, 0, 0]

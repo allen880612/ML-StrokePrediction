@@ -1,43 +1,69 @@
 {% extends "template.html" %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/data.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/data.css') }}">
 {% endblock css %}
 
 {% block content %}
-<section class="projects-section bg-light" id="projects">
-    <div class="container px-4 px-lg-5">
-        <!-- Featured Project Row-->
-        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <div class="col-xl-7 col-lg-6"><img class="img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='asset/img/CorrelationHeatmap.png') }}" alt="..." /></div>
-            <div class="col-xl-5 col-lg-6">
-                <div class="featured-text text-center text-lg-left">
-                    <h4>Correlation Heatmap</h4>
-                    <p class="text-black-50 mb-0">Stroke has more relateionship with:<br>
-                        age, hypertension, heart disease, ever married.</p>
-                </div>
+<div class="container px-4 px-lg-5">
+    <!-- Featured Project Row-->
+    <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <div class="col-xl-9 col-lg-7">
+            <img class="img-fluid mb-3 mb-lg-0"
+                src="{{ url_for('static', filename='asset/img/CorrelationHeatmap.png') }}" alt="..." />
+        </div>
+                <div class="col-xl-3 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+                <h2>Correlation Heatmap</h2>
+                <p class="text-black-80 mb-0">
+                    <br>
+                    Stroke has more relateionship with:<br>
+                    age, hypertension, <br>
+                    heart disease, ever married.</p>
             </div>
         </div>
-        <!-- Project One Row -->
-        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-            <div class="col-lg-10">
-                <canvas id=t_test_chart></canvas>
-            </div>
-            <div class="col-lg-2">
-                <div class="bg-black text-center h-100 project">
-                    <div class="d-flex h-100">
-                        <div class="project-text w-100 my-auto text-center text-lg-left">
-                            <h4 class="text-black">T-Test Result</h4>
-                            <p class="mb-0 text-black-50">Stroke has more relationship with ...</p>
-                            <hr class="d-none d-lg-block mb-0 ms-0" />
-                        </div>
+    </div>
+    <!-- Project One Row -->
+    <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+        <div class="col-lg-10">
+            <canvas id="t_test_chart"></canvas>
+        </div>
+        <div class="col-lg-2">
+            <div class="bg-black text-center h-100 project">
+                <div class="d-flex h-100">
+                    <div class="project-text w-100 my-auto text-center text-lg-left">
+                        <h2 class="text-black">T-Test Result</h2>
+                        <p class="mb-0 text-black-60">Stroke has more relationship with ...</p>
+                        <hr class="d-none d-lg-block mb-0 ms-0" />
                     </div>
                 </div>
             </div>
         </div>
-</section>
+    </div>
+
+    <br>
+    <!-- Feature Importance Chart-->
+    <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+        <div class="col-xl-9 card m-2 p-2">
+            <canvas id="importance_chart"></canvas>
+        </div>
+        <div class="col-xl-2 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+                <h2>Logistic Regression</h2>
+                <p class="mb-0 text-black-60">
+                    <br>
+                    Stroke has more relateionship with:<br>
+                    age, work type, hypertension, <br>
+                    smoking status, heart disease
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
 {% endblock content %}
 
 {% block js %}
-    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
-{% endblock js %}  
+<script src="{{ url_for('static', filename='js/data.js') }}"></script>
+{% endblock js %}

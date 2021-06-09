@@ -115,6 +115,7 @@ var workChart = DrawPieChart('work_type_chart','Work Type',workLabel,workData);
 var smokingChart = DrawPieChart('smoking_status_chart','Smoking Status',smokingLabel,smokingData);
 var predictChart = DrawPieChart('predict_chart','Prevalence',predictLabel,predictData);
 //畫圓餅圖
+
 function DrawPieChart(elementStr,title,label,data,){
     return new Chart(document.getElementById(elementStr).getContext('2d'), {
         type: 'pie',
@@ -428,7 +429,6 @@ function BuildChartHeartDisease(data) {
 }
 
 function BuildChartHypertension(data) {
-    console.log(data);
     var labels = ["Healthy have", "Healthy NOT have", "Stroke have", "Stroke NOT have"];
     var title = 'Hypertension';
     return BuildDoughnutChart($("#chart_hypertension"), data, labels, title);
@@ -581,7 +581,6 @@ function UpdateChartDisease(chart, haveDisease)
         colors[3] = "rgba(0, 0, 0, 0.1)";
     }
     
-    console.log(chart);
     chart.data.datasets.forEach((dataset) => {
         dataset.backgroundColor = colors;
     });
