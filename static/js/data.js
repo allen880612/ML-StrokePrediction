@@ -26,7 +26,7 @@ function GetDataByAjax(api) {
             dataType: "text",
             success: function (data) {
                 // alert("success " + data);
-                console.log(data);
+                // console.log(data);
                 response = data;
             },
             error: function (jQRe) {
@@ -74,12 +74,15 @@ function BuildOptions(title, padding_top, padding_bottom) {
     return options;
 }
 
-function GetSortedData(data){
+function GetSortedData(data) {
     var value_key_list = []
     for (var key in data) {
-        value_key_list.push([data[key], key]);
+
+        value_key_list.push([key, Math.abs(data[key])]);
     }
-    return value_key_list.sort().reverse();
+    return value_key_list.sort(function (first, second) {
+        return second[1] - first[1];
+    });
 }
 
 function GetT_TestData(data) {
@@ -87,17 +90,17 @@ function GetT_TestData(data) {
     var keys = []
     var values = [];
     var value_key_list = GetSortedData(data);
-
-    for (var i=0; i<value_key_list.length; i++) {
-        keys.push(value_key_list[i][1]);
-        values.push(value_key_list[i][0]);
-        console.log(value_key_list[i][1], value_key_list[i][0]);
+    // console.log(value_key_list);
+    for (var i = 0; i < value_key_list.length; i++) {
+        keys.push(value_key_list[i][0]);
+        values.push(value_key_list[i][1]);
+        // console.log(value_key_list[i][0], value_key_list[i][1]);
     }
 
     data_source.labels = keys
     data_source.datasets = [];
     data_source.datasets.push({
-        label: "log(pValue)",
+        label: "| log(pValue) |",
         backgroundColor: "#46BFBD",
         data: values
     });
@@ -120,15 +123,15 @@ function BuildChartT_Test(data) {
     }
     new Chart($("#t_test_chart"), config)
 }
-   
+
 
 // Load Trigger
 window.onload = function () {
     LoadData();
-DrawImportanceChart();
+    DrawImportanceChart();
 }
 
-function GetData(url){
+function GetData(url) {
     var t;
     $.ajax({
         async: false,
@@ -141,59 +144,58 @@ function GetData(url){
     return t;
 }
 
-function DrawImportanceChart()
-{
+function DrawImportanceChart() {
     var data = GetData('/importance');
     var importanceData = [data.age,
-                        data.work_type,
-                        data.hypertension,
-                        data.smoking_status,
-                        data.heart_disease,
-                        data.avg_glucose_level,
-                        data.ever_married,
-                        data.residence_type,
-                        data.bmi,
-                        data.gender]
+    data.work_type,
+    data.hypertension,
+    data.smoking_status,
+    data.heart_disease,
+    data.avg_glucose_level,
+    data.ever_married,
+    data.residence_type,
+    data.bmi,
+    data.gender]
     new Chart(document.getElementById("importance_chart"), {
-      type: 'bar',
-      data: {
-        labels: ["Age","Work Type","Hypertension","Smoking Status","Heart Disease","Glucose Level","Ever Married","Residence Type","Bmi","Gender"],
-        datasets: [{
-          label: 'Importance',
-          data: importanceData,
-          backgroundColor: [
-            'rgba(0, 255, 0, 0.5)'
-          ]
-        }]
-      },
-      options: {
-        responsive: false,
-        plugins:{
-            title: {
-                display: true,
-                text: "Feature Importance",
-                font: {
-                    size: 28
-                },
-                color:'black'
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "black",
-                    fontSize: 14,
-                    beginAtZero: true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: "black",
-                    fontSize: 14,
-                    beginAtZero: true
-                }
+        type: 'bar',
+        data: {
+            labels: ["Age", "Work Type", "Hypertension", "Smoking Status", "Heart Disease", "Glucose Level", "Ever Married", "Residence Type", "Bmi", "Gender"],
+            datasets: [{
+                label: 'Importance',
+                data: importanceData,
+                backgroundColor: [
+                    'rgba(0, 255, 0, 0.5)'
+                ]
             }]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Feature Importance",
+                    font: {
+                        size: 28
+                    },
+                    color: 'black'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: "black",
+                        fontSize: 14,
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "black",
+                        fontSize: 14,
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
-      }
     });
 }
