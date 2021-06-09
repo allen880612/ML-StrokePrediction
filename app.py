@@ -116,48 +116,75 @@ def get_smoking():
 
 @app.route("/test_get_data", methods=["GET"])
 def test_get_data():
-    return json.dumps(request.data)
+    return json.dumps(request.args)
+
+@app.route("/t_test", methods=["GET"])
+def get_t_test_result():
+    res = {
+        'Residence_type_Rural': 0.6726720440894055,
+        'Residence_type_Urban': 0.6726720440894076,
+        'age': 3.6556933219806625e-61,
+        'avg_glucose_level': 1.3799691107259876e-22,
+        'bmi': 0.0029832690997420824,
+        'ever_married_No': 1.5644079058362266e-13,
+        'ever_married_Yes': 1.5644079058361983e-13,
+        'gender_Female': 0.6313076318772126,
+        'gender_Male': 0.6269370366326462,
+        'gender_Other': 0.8330099212436719,
+        'heart_disease': 2.774232441236691e-22,
+        'hypertension': 1.0816791323337411e-23,
+        'smoking_status_Unknown': 1.4250714281814548e-07,
+        'smoking_status_formerly smoked': 5.860858628293931e-05,
+        'smoking_status_never smoked': 0.452566637191093,
+        'smoking_status_smokes': 0.13147677049124915,
+        'work_type_Govt_job': 0.8034483430870814,
+        'work_type_Never_worked': 0.3216316850308596,
+        'work_type_Private': 0.29550587359637775,
+        'work_type_Self-employed': 0.00010426677876820362,
+        'work_type_children': 1.338562708809395e-08
+    }
+    return json.dumps(res)
 
 @app.route("/predict", methods=['GET'])
 def get_predict():
 
-    age = [request.form["age"]]
-    hypertension = [1 if request.form["hypertension"] else 0]
-    heart_disease = [1 if request.form["heart_disease"] else 0]
-    avg_glucose_level = [request.form["avg_glucose_level"]]
-    bmi = [request.form["bmi"]]
+    age = [request.args["age"]]
+    hypertension = [1 if request.args["hypertension"] else 0]
+    heart_disease = [1 if request.args["heart_disease"] else 0]
+    avg_glucose_level = [request.args["avg_glucose_level"]]
+    bmi = [request.args["bmi"]]
 
-    if(request.form["work_type"]==0):
+    if(request.args["work_type"]==0):
         work_type=[1, 0, 0, 0, 0]
-    elif(request.form["work_type"]==1):
+    elif(request.args["work_type"]==1):
         work_type=[0, 1, 0, 0, 0]
-    elif(request.form["work_type"]==2):
+    elif(request.args["work_type"]==2):
         work_type=[0, 0, 1, 0, 0]
-    elif(request.form["work_type"]==3):
+    elif(request.args["work_type"]==3):
         work_type=[0, 0, 0, 1, 0]
     else:
         work_type=[0, 0, 0, 0, 1]
 
-    if(request.form["smoking_status"]==0):
+    if(request.args["smoking_status"]==0):
         smoking_status = [1, 0, 0, 0]
-    elif(request.form["smoking_status"]==1):
+    elif(request.args["smoking_status"]==1):
         smoking_status = [0, 1, 0, 0]
-    elif(request.form["smoking_status"]==2):
+    elif(request.args["smoking_status"]==2):
         smoking_status = [0, 0, 1, 0]
     else:
         smoking_status = [0, 0, 0, 1]
 
-    if(request.form["gender"]==0):
+    if(request.args["gender"]==0):
         gender = [1, 0, 0]
     else:
         gender = [0, 1, 0]
 
-    if(request.form["ever_married"]):
+    if(request.args["ever_married"]):
         ever_married = [0, 1]
     else:
         ever_married = [1, 0]
 
-    if(request.form["Residence_type"]==0):
+    if(request.args["Residence_type"]==0):
         Residence_type = [1, 0]
     else:
         Residence_type = [0, 1]
@@ -173,7 +200,7 @@ def get_predict():
               'Residence_type_Rural', 'Residence_type_Urban']).T
     
     res = {
-        "result":model.predict_proba(data)[0][1]
+        "result": float(model.predict_proba(data)[0][1])
     }
     return json.dumps(res)
 
