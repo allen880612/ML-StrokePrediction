@@ -122,27 +122,27 @@ def test_get_data():
 @app.route("/t_test", methods=["GET"])
 def get_t_test_result():
     res = {
-        'Residence_type_Rural': 0.6726720440894055,
-        'Residence_type_Urban': 0.6726720440894076,
-        'age': 3.6556933219806625e-61,
-        'avg_glucose_level': 1.3799691107259876e-22,
-        'bmi': 0.0029832690997420824,
-        'ever_married_No': 1.5644079058362266e-13,
-        'ever_married_Yes': 1.5644079058361983e-13,
-        'gender_Female': 0.6313076318772126,
-        'gender_Male': 0.6269370366326462,
-        'gender_Other': 0.8330099212436719,
-        'heart_disease': 2.774232441236691e-22,
-        'hypertension': 1.0816791323337411e-23,
-        'smoking_status_Unknown': 1.4250714281814548e-07,
-        'smoking_status_formerly smoked': 5.860858628293931e-05,
-        'smoking_status_never smoked': 0.452566637191093,
-        'smoking_status_smokes': 0.13147677049124915,
-        'work_type_Govt_job': 0.8034483430870814,
-        'work_type_Never_worked': 0.3216316850308596,
-        'work_type_Private': 0.29550587359637775,
-        'work_type_Self-employed': 0.00010426677876820362,
-        'work_type_children': 1.338562708809395e-08
+        'Residence_type_Rural': -0.17219662100159383,
+        'Residence_type_Urban': -0.1721966210015925,
+        'age': -60.43703024460068,
+        'avg_glucose_level': -21.860130634751947,
+        'bmi': -2.5253075702175667,
+        'ever_married_No': -12.805649997979193,
+        'ever_married_Yes': -12.8056499979792,
+        'gender_Female': -0.1997589604554348,
+        'gender_Male': -0.2027760732300026,
+        'gender_Other': -0.07934982606533555,
+        'heart_disease': -21.556857154035143,
+        'hypertension': -22.965901548585528,
+        'smoking_status_Unknown': -6.846163367172928,
+        'smoking_status_formerly smoked': -4.2320387542526285,
+        'smoking_status_never smoked': -0.34431746500317384,
+        'smoking_status_smokes': -0.8811509721828635,
+        'work_type_Govt_job': -0.09504204053525168,
+        'work_type_Never_worked': -0.49264117399001806,
+        'work_type_Private': -0.5294338824810523,
+        'work_type_Self-employed': -3.981854043403597,
+        'work_type_children': -7.873361278229796
     }
     return json.dumps(res)
 
