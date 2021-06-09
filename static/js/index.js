@@ -208,7 +208,7 @@ function UpdateChart(chart, size, index, color){
   for(i=0;i<size;i++){
     chart.data.datasets[i].backgroundColor = ['rgba(0, 0, 0, 0.15)','rgba(0, 0, 0, 0.08)'];
   }
-  chart.data.datasets[index].backgroundColor = color;
+  chart.data.datasets[parseInt(index)].backgroundColor = color;
   chart.update();
 }
 
