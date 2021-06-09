@@ -476,7 +476,7 @@ function BuildChartAvgGlucodeLevel(data) {
 // Bmi Bar Chart 
 function GetBmiConfig(data) {
     var data_source = {};
-    data_source.labels = BulidIntervalLabel(10, 60, 5);
+    data_source.labels = BulidIntervalLabel(10, 35, 5);
     data_source.datasets = [];
     data_source.datasets.push({
         label: "Healthy People(%)",
