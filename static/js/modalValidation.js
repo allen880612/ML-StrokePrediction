@@ -170,12 +170,10 @@ function OnPredictClick(){
                 predictChart.data.datasets[0].data[1] = 100-data;
                 $("#stroke_rate").text(data.toFixed(2) + '%');
                 Update();
+                ShowPersonalInfo();
+                $("#personalInfoModal").modal('hide');
+                $("#prediction_result").show();
         });
-
         
-        ShowPersonalInfo();
-        
-        $("#personalInfoModal").modal('hide');
-        $("#prediction_result").show();
     }
 }
