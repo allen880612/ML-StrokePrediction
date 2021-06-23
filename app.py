@@ -230,7 +230,7 @@ def get_disease():
         "healthy_disease":100*sum((patients.heart_disease==1) & (~patients.stroke))/healthy_len,
         "healthy_not_disease":100*sum((patients.heart_disease==0) & (~patients.stroke))/healthy_len,
         "stroke_disease":100*sum((patients.heart_disease==1) & (patients.stroke))/stroke_len,
-        "stroke_not_disease":100*sum((patients.heart_disease==0) & (~patients.stroke))/stroke_len,
+        "stroke_not_disease":100*sum((patients.heart_disease==0) & (patients.stroke))/stroke_len,
     }
 
     return json.dumps(res)
@@ -244,7 +244,7 @@ def get_hypertension():
         "healthy_disease":100*sum((patients.hypertension==1) & (~patients.stroke))/healthy_len,
         "healthy_not_disease":100*sum((patients.hypertension==0) & (~patients.stroke))/healthy_len,
         "stroke_disease":100*sum((patients.hypertension==1) & (patients.stroke))/stroke_len,
-        "stroke_not_disease":100*sum((patients.hypertension==0) & (~patients.stroke))/stroke_len,
+        "stroke_not_disease":100*sum((patients.hypertension==0) & (patients.stroke))/stroke_len,
     }
 
     return json.dumps(res)
