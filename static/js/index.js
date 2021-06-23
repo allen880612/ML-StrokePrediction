@@ -5,52 +5,52 @@ var workData;
 var smokingData;
 GetPieData();
 
-var genderLabel = ['Stroke-Female','NoStroke-Female',
-                    'Stroke-Male', 'NoStroke-Male' ];
+var genderLabel = ['Stroke-Female', 'NoStroke-Female',
+    'Stroke-Male', 'NoStroke-Male'];
 genderData = [
     {
-      backgroundColor: ['rgba(253, 6, 209, 0.7)', 'rgba(253, 6, 209, 0.3)'],
-      data: [genderData.femaleStroke, genderData.femaleNoStroke]
+        backgroundColor: ['rgba(253, 6, 209, 0.7)', 'rgba(253, 6, 209, 0.3)'],
+        data: [genderData.femaleStroke, genderData.femaleNoStroke]
     },
     {
-      backgroundColor: ['rgba(6, 35, 253, 0.7)', 'rgba(6, 35, 253, 0.3)'],
-      data: [genderData.maleStroke, genderData.maleNoStroke]
+        backgroundColor: ['rgba(6, 35, 253, 0.7)', 'rgba(6, 35, 253, 0.3)'],
+        data: [genderData.maleStroke, genderData.maleNoStroke]
     }
 ];
 
 var MarriedLabel = ['Stroke-Never', 'NoStroke-Never',
-                    'Stroke-Ever','NoStroke-Ever' ];                        
+    'Stroke-Ever', 'NoStroke-Ever'];
 
 marriedData = [
     {
-      backgroundColor: ['rgba(255, 0, 0, 0.7)', 'rgba(255, 0, 0, 0.3)'],
-      data: [marriedData.neverStroke, marriedData.neverNoStroke]
+        backgroundColor: ['rgba(255, 0, 0, 0.7)', 'rgba(255, 0, 0, 0.3)'],
+        data: [marriedData.neverStroke, marriedData.neverNoStroke]
     },
     {
-      backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],
-      data: [marriedData.everStroke, marriedData.everNoStroke]
+        backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],
+        data: [marriedData.everStroke, marriedData.everNoStroke]
     }
 ];
 
 var residenceLabel = ['Stroke-Urban', 'NoStroke-Urban',
-                          'Stroke-Rural','NoStroke-Rural' ];                          
+    'Stroke-Rural', 'NoStroke-Rural'];
 
 residenceData = [
     {
-      backgroundColor: ['rgba(0, 140, 225, 0.7)', 'rgba(0, 140, 225, 0.3)'],
-      data: [residenceData.urbanStroke, residenceData.urbanNoStroke]
+        backgroundColor: ['rgba(0, 140, 225, 0.7)', 'rgba(0, 140, 225, 0.3)'],
+        data: [residenceData.urbanStroke, residenceData.urbanNoStroke]
     },
     {
-      backgroundColor: ['rgba(185, 110, 0, 0.7)', 'rgba(185, 110, 0, 0.3)'],
-      data: [residenceData.ruralStroke, residenceData.ruralNoStroke]
+        backgroundColor: ['rgba(185, 110, 0, 0.7)', 'rgba(185, 110, 0, 0.3)'],
+        data: [residenceData.ruralStroke, residenceData.ruralNoStroke]
     }
 ];
 
-var workLabel = ['Stroke-Govt Job','NoStroke-Govt Job',
-                'Stroke-Self Empolyed','NoStroke-Self Empolyed',
-                'Stroke-Private','NoStroke-Private',
-                'Stroke-Children', 'NoStroke-Children',
-                'Stroke-Never Worked','NoStroke-Never Worked'];
+var workLabel = ['Stroke-Govt Job', 'NoStroke-Govt Job',
+    'Stroke-Self Empolyed', 'NoStroke-Self Empolyed',
+    'Stroke-Private', 'NoStroke-Private',
+    'Stroke-Children', 'NoStroke-Children',
+    'Stroke-Never Worked', 'NoStroke-Never Worked'];
 
 workData = [
     {
@@ -62,12 +62,12 @@ workData = [
         data: [workData.selfStroke, workData.selfNoStroke]
     },
     {
-      backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],
-      data: [workData.privateStroke, workData.privateNoStroke]
+        backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],
+        data: [workData.privateStroke, workData.privateNoStroke]
     },
     {
-      backgroundColor: ['rgba(255, 255, 0, 0.7)', 'rgba(255, 255, 0, 0.3)'],
-      data: [workData.childrenStroke, workData.childrenNoStroke]
+        backgroundColor: ['rgba(255, 255, 0, 0.7)', 'rgba(255, 255, 0, 0.3)'],
+        data: [workData.childrenStroke, workData.childrenNoStroke]
     },
     {
         backgroundColor: ['rgba(0, 0, 0, 0.7)', 'rgba(0, 0,  0, 0.3)'],
@@ -75,10 +75,10 @@ workData = [
     }
 ];
 
-var smokingLabel = ['Stroke-Formerly','NoStroke-Formerly',
-                     'Stroke-Smokes', 'NoStroke-Smokes',
-                     'Stroke-Never','NoStroke-Neverd',
-                     'Stroke-Unknown','NoStroke-Unknown'];
+var smokingLabel = ['Stroke-Formerly', 'NoStroke-Formerly',
+    'Stroke-Smokes', 'NoStroke-Smokes',
+    'Stroke-Never', 'NoStroke-Neverd',
+    'Stroke-Unknown', 'NoStroke-Unknown'];
 
 smokingData = [
     {
@@ -86,37 +86,37 @@ smokingData = [
         data: [smokingData.formerlyStroke, smokingData.formerlyNoStroke]
     },
     {
-      backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],      
-      data: [smokingData.smokesStroke, smokingData.smokesNoStroke]
+        backgroundColor: ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)'],
+        data: [smokingData.smokesStroke, smokingData.smokesNoStroke]
     },
     {
         backgroundColor: ['rgba(255, 0, 0, 0.7)', 'rgba(255, 0, 0, 0.3)'],
         data: [smokingData.neverStroke, smokingData.neverNoStroke]
     },
     {
-      backgroundColor: ['rgba(0, 0, 255, 0.7)', 'rgba(0, 0, 255, 0.3)'],
-      data: [smokingData.unknownStroke, smokingData.unknownNoStroke]
+        backgroundColor: ['rgba(0, 0, 255, 0.7)', 'rgba(0, 0, 255, 0.3)'],
+        data: [smokingData.unknownStroke, smokingData.unknownNoStroke]
     }
 ];
 
 
-var predictLabel = ['Stroke','NoStroke' ];
+var predictLabel = ['Stroke', 'NoStroke'];
 var predictData = [
     {
-      backgroundColor: ['rgba(0, 140, 225, 0.7)', 'rgba(0, 140, 225, 0.3)'],      
-      data: [50, 50]
+        backgroundColor: ['rgba(0, 140, 225, 0.7)', 'rgba(0, 140, 225, 0.3)'],
+        data: [50, 50]
     }
 ]
 
-var genderChart = DrawPieChart('gender_chart','Gender',genderLabel,genderData);
-var marriedChart = DrawPieChart('ever_married_chart','Ever Married',MarriedLabel,marriedData);
-var residenceChart = DrawPieChart('residence_type_chart','Residence Type',residenceLabel,residenceData);
-var workChart = DrawPieChart('work_type_chart','Work Type',workLabel,workData);
-var smokingChart = DrawPieChart('smoking_status_chart','Smoking Status',smokingLabel,smokingData);
-var predictChart = DrawPieChart('predict_chart','Prevalence',predictLabel,predictData);
+var genderChart = DrawPieChart('gender_chart', 'Gender', genderLabel, genderData);
+var marriedChart = DrawPieChart('ever_married_chart', 'Ever Married', MarriedLabel, marriedData);
+var residenceChart = DrawPieChart('residence_type_chart', 'Residence Type', residenceLabel, residenceData);
+var workChart = DrawPieChart('work_type_chart', 'Work Type', workLabel, workData);
+var smokingChart = DrawPieChart('smoking_status_chart', 'Smoking Status', smokingLabel, smokingData);
+var predictChart = DrawPieChart('predict_chart', 'Prevalence', predictLabel, predictData);
 //畫圓餅圖
 
-function DrawPieChart(elementStr,title,label,data,){
+function DrawPieChart(elementStr, title, label, data,) {
     return new Chart(document.getElementById(elementStr).getContext('2d'), {
         type: 'pie',
         data: {
@@ -128,43 +128,43 @@ function DrawPieChart(elementStr,title,label,data,){
             plugins: {
                 legend: {
                     labels: {
-                      generateLabels: function(chart) {
-                        // Get the default label list
-                        const original = Chart.overrides.pie.plugins.legend.labels.generateLabels;
-                        const labelsOriginal = original.call(this, chart);
-            
-                        // Build an array of colors used in the datasets of the chart
-                        var datasetColors = chart.data.datasets.map(function(e) {
-                          return e.backgroundColor;
-                        });
-                        datasetColors = datasetColors.flat();
-            
-                        // Modify the color and hide state of each label
-                        labelsOriginal.forEach(label => {
-                          // There are twice as many labels as there are datasets. This converts the label index into the corresponding dataset index
-                          label.datasetIndex = (label.index - label.index % 2) / 2;
-            
-                          // The hidden state must match the dataset's hidden state
-                          label.hidden = !chart.isDatasetVisible(label.datasetIndex);
-            
-                          // Change the color to match the dataset
-                          label.fillStyle = datasetColors[label.index];
-                        });
-            
-                        return labelsOriginal;
-                      }
+                        generateLabels: function (chart) {
+                            // Get the default label list
+                            const original = Chart.overrides.pie.plugins.legend.labels.generateLabels;
+                            const labelsOriginal = original.call(this, chart);
+
+                            // Build an array of colors used in the datasets of the chart
+                            var datasetColors = chart.data.datasets.map(function (e) {
+                                return e.backgroundColor;
+                            });
+                            datasetColors = datasetColors.flat();
+
+                            // Modify the color and hide state of each label
+                            labelsOriginal.forEach(label => {
+                                // There are twice as many labels as there are datasets. This converts the label index into the corresponding dataset index
+                                label.datasetIndex = (label.index - label.index % 2) / 2;
+
+                                // The hidden state must match the dataset's hidden state
+                                label.hidden = !chart.isDatasetVisible(label.datasetIndex);
+
+                                // Change the color to match the dataset
+                                label.fillStyle = datasetColors[label.index];
+                            });
+
+                            return labelsOriginal;
+                        }
                     },
-                    onClick: function(mouseEvent, legendItem, legend) {
-                      // toggle the visibility of the dataset from what it currently is
-                      legend.chart.getDatasetMeta(
-                        legendItem.datasetIndex
-                      ).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
-                      legend.chart.update();
+                    onClick: function (mouseEvent, legendItem, legend) {
+                        // toggle the visibility of the dataset from what it currently is
+                        legend.chart.getDatasetMeta(
+                            legendItem.datasetIndex
+                        ).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
+                        legend.chart.update();
                     }
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
+                        label: function (context) {
                             const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
                             return context.chart.data.labels[labelIndex] + ': ' + context.formattedValue;
                         }
@@ -182,7 +182,7 @@ function DrawPieChart(elementStr,title,label,data,){
     });
 }
 
-function GetData(url){
+function GetData(url) {
     var t;
     $.ajax({
         async: false,
@@ -195,41 +195,44 @@ function GetData(url){
     return t;
 }
 
-function GetPieData(){
-    genderData =  GetData('/gender');
-    marriedData =  GetData('/married');
-    residenceData =  GetData('/residence');
-    workData =  GetData('/work');
-    smokingData =  GetData('/smoking');
+function GetPieData() {
+    genderData = GetData('/gender');
+    marriedData = GetData('/married');
+    residenceData = GetData('/residence');
+    workData = GetData('/work');
+    smokingData = GetData('/smoking');
 }
 
-function UpdateChart(chart, size, index, color){
-  var i;
-  for(i=0;i<size;i++){
-    chart.data.datasets[i].backgroundColor = ['rgba(0, 0, 0, 0.15)','rgba(0, 0, 0, 0.08)'];
-  }
-  chart.data.datasets[parseInt(index)].backgroundColor = color;
-  chart.update();
+function UpdateChart(chart, size, index, color) {
+    console.log(index);
+    console.log(parseInt(index));
+    console.log(chart.data.datasets);
+    var i;
+    for (i = 0; i < size; i++) {
+        chart.data.datasets[i].backgroundColor = ['rgba(0, 0, 0, 0.15)', 'rgba(0, 0, 0, 0.08)'];
+    }
+    chart.data.datasets[parseInt(index)].backgroundColor = color;
+    chart.update();
 }
 
-function UpdateMarriedChart(){
-  var flag = $("#ever_married_check").is(':checked');
-  var marriedIndex;
-  if(flag){
-    marriedIndex = 1;
-  }else{
-    marriedIndex = 0;
-  }  
-  UpdateChart(marriedChart,2,marriedIndex,['rgba(255, 0, 0, 0.7)','rgba(255, 0, 0, 0.3)']);
+function UpdateMarriedChart() {
+    var flag = $("#ever_married_check").is(':checked');
+    var marriedIndex;
+    if (flag) {
+        marriedIndex = 1;
+    } else {
+        marriedIndex = 0;
+    }
+    UpdateChart(marriedChart, 2, marriedIndex, ['rgba(255, 0, 0, 0.7)', 'rgba(255, 0, 0, 0.3)']);
 }
 
-function Update(){
-  UpdateChart(genderChart,2,$("#gender_option").val(),['rgba(0, 255, 0, 0.7)','rgba(0, 255, 0, 0.3)']);
-  UpdateMarriedChart();
-  UpdateChart(residenceChart,2,$("#residence_type_option").val(),['rgba(0, 0, 255, 0.7)','rgba(0, 0, 255, 0.3)']);
-  UpdateChart(workChart,5,$("#work_type_option").val(),['rgba(219, 115, 0, 0.7)','rgba(219, 115, 0, 0.3)']);
-  UpdateChart(smokingChart,4,$("#smoking_status_option").val(),['rgba(255, 0, 255, 0.7)','rgba(255, 0, 255, 0.3)']);
-  UpdateChartByUserData();
+function Update() {
+    UpdateChart(genderChart, 2, $("#gender_option").val(), ['rgba(0, 255, 0, 0.7)', 'rgba(0, 255, 0, 0.3)']);
+    UpdateMarriedChart();
+    UpdateChart(residenceChart, 2, $("#residence_type_option").val(), ['rgba(0, 0, 255, 0.7)', 'rgba(0, 0, 255, 0.3)']);
+    UpdateChart(workChart, 5, $("#work_type_option").val(), ['rgba(219, 115, 0, 0.7)', 'rgba(219, 115, 0, 0.3)']);
+    UpdateChart(smokingChart, 4, $("#smoking_status_option").val(), ['rgba(255, 0, 255, 0.7)', 'rgba(255, 0, 255, 0.3)']);
+    UpdateChartByUserData();
 }
 
 // Chart object
@@ -369,7 +372,7 @@ function GetAgeData(data) {
 
 // Age bar chart
 function BuildChartAge(data) {
-    
+
     var data_source = GetAgeData(data);
     //console.log(data_source);
     var options = BuildOptions("Age Distribution", 5, 5);
@@ -509,9 +512,9 @@ function BuildChartBmi(data) {
  * Update Chart
  */
 
- function GetIndexInInterval(start, end, step, target) {
+function GetIndexInInterval(start, end, step, target) {
     for (var i = start; i < end; i += step) {
-        if (target >= i && target < i+step){
+        if (target >= i && target < i + step) {
             return (i - start) / step;
         }
     }
@@ -520,10 +523,9 @@ function BuildChartBmi(data) {
 }
 
 
-function UpdateBarChart(chart, index, length)
-{
+function UpdateBarChart(chart, index, length) {
     var healthy_colors = [];
-    for (var i = 0; i < length; i++){
+    for (var i = 0; i < length; i++) {
         healthy_colors.push("rgba(0, 0, 0, 0.1)");
     }
 
@@ -538,10 +540,9 @@ function UpdateBarChart(chart, index, length)
     chart.update();
 }
 
-function UpdateLineChart(chart, index, length)
-{
+function UpdateLineChart(chart, index, length) {
     var healthy_colors = [];
-    for (var i = 0; i < length; i++){
+    for (var i = 0; i < length; i++) {
         healthy_colors.push("rgba(0, 0, 0, 0.1)");
     }
 
@@ -549,7 +550,7 @@ function UpdateLineChart(chart, index, length)
     // deepcopy
     var stroke_colors = healthy_colors.filter(() => true);
     stroke_colors[index] = "#F7464A";
-    
+
     chart.data.datasets[0].borderColor = healthy_colors;
     chart.data.datasets[0].pointBackgroundColor = healthy_colors;
     chart.data.datasets[1].borderColor = stroke_colors;
@@ -562,25 +563,23 @@ function UpdateLineChart(chart, index, length)
     chart.update();
 }
 
-function UpdateChartAge(age)
-{
+function UpdateChartAge(age) {
     var index = GetIndexInInterval(0, 100, 10, age);
     var length = chart_age.data.datasets[0].data.length;
     UpdateBarChart(chart_age, index, length);
 }
 
-function UpdateChartDisease(chart, haveDisease)
-{
+function UpdateChartDisease(chart, haveDisease) {
     var colors = ["#F7464A", "#46BFBD", "#000000", "#666666"];
 
-    if (haveDisease){
+    if (haveDisease) {
         colors[0] = "rgba(0, 0, 0, 0.1)";
         colors[2] = "rgba(0, 0, 0, 0.1)";
-    }else{
+    } else {
         colors[1] = "rgba(0, 0, 0, 0.1)";
         colors[3] = "rgba(0, 0, 0, 0.1)";
     }
-    
+
     chart.data.datasets.forEach((dataset) => {
         dataset.backgroundColor = colors;
     });
@@ -588,15 +587,13 @@ function UpdateChartDisease(chart, haveDisease)
     chart.update();
 }
 
-function UpdateChartAvgGlucodeLevel(avg_glucode_level)
-{
+function UpdateChartAvgGlucodeLevel(avg_glucode_level) {
     var index = GetIndexInInterval(40, 260, 20, avg_glucode_level);
     var length = chart_avg_glucose_level.data.datasets[0].data.length;
     UpdateLineChart(chart_avg_glucose_level, index, length);
 }
 
-function UpdateChartBmi(bmi)
-{
+function UpdateChartBmi(bmi) {
     var index = GetIndexInInterval(10, 60, 5, bmi);
     var length = chart_bmi.data.datasets[0].data.length;
     UpdateBarChart(chart_bmi, index, length);
